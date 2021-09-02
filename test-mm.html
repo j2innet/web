@@ -1,0 +1,182 @@
+<html>
+
+<head>
+	<title>mm diagram</title>
+	<script src="mermaid.min.js"></script>
+	<script>mermaid.initialize({startOnLoad:true});</script>
+</head>
+
+<body>
+
+
+<div class="mermaid">
+	flowchart LR
+	A-->B
+</div>
+
+<div class="mermaid">
+	graph TD
+	A-->B
+</div>
+
+<div class="mermaid">
+	sequenceDiagram
+	participant A
+	participant B
+	loop read
+		A->>A: sleep
+	end
+	note left of A: message
+	A->>C: 1
+	C-->>A: 2
+	C->>B: 3
+	B-->>C: 4
+</div>
+
+<div class="mermaid">
+gantt
+dateFormat  YYYY-MM-DD
+title Adding GANTT diagram to mermaid
+excludes weekdays 2014-01-10
+
+section A section
+Completed task            :done,    des1, 2014-01-06,2014-01-08
+Active task               :active,  des2, 2014-01-09, 3d
+Future task               :         des3, after des2, 5d
+Future task2               :         des4, after des3, 5d
+</div>
+
+<div class="mermaid">
+classDiagram
+Class01 <|-- AveryLongClass : Cool
+Class03 *-- Class04
+Class05 o-- Class06
+Class07 .. Class08
+Class09 --> C2 : Where am i?
+Class09 --* C3
+Class09 --|> Class07
+Class07 : equals()
+Class07 : Object[] elementData
+Class01 : size()
+Class01 : int chimp
+Class01 : int gorilla
+Class08 <--> C2: Cool label
+</div>
+
+<div class="mermaid">
+stateDiagram-v2
+    [*] --> Still
+    Still --> [*]
+    Still --> Moving
+    Moving --> Still
+    Moving --> Crash
+    Crash --> [*]
+</div>
+
+
+<div class="mermaid">
+flowchart TD
+	id1([Start]) --> id2[[Stop]]
+	id3>message] --> id4[(data)] --> process
+	id5{{thread}} --> id6[/loop/] --> id7[\loop\] --> id8[/loop\] --> id9[\loop/]
+</div>
+
+<div class="mermaid">
+flowchart LR
+    A --data--> B --2--> C
+    A -.data.-> B
+    A ==data==> B & C --> D & E
+</div>
+
+<div class="mermaid">
+flowchart LR
+    A & B & C --> D & E & F --> Output1 & Output2 & Output3
+</div>
+
+<div class="mermaid">
+    flowchart LR;
+        A-->B;
+        B-->C;
+        C-->D;
+        click A callback "Tooltip"
+        click B "http://www.github.com" "This is a link"
+        click C call callback() "Tooltip"
+        click D href "http://www.github.com" "This is a link"
+</div>
+
+<div class="mermaid">
+    flowchart LR;
+    A --o B
+    B --x C
+    A o--o B
+    B <--> C
+    C x--x D
+</div>
+
+<div class="mermaid">
+    flowchart TD;
+    A[Start] --> B{Is it?};
+    B -->|Yes| C[OK];
+    C --> D[Rethink];
+    D --> B;
+    B ---->|No| E[End];
+</div>
+
+<div class="mermaid">
+flowchart LR
+  subgraph TOP
+    direction TB
+    subgraph B1
+        direction RL
+        i1 -->f1
+    end
+    subgraph B2
+        direction BT
+        i2 -->f2
+    end
+  end
+  A --> TOP --> B
+  B1 --> B2
+</div>
+
+<div class="mermaid">
+%% this is a comment A -- text --> B{node}
+flowchart LR
+    id1(Start)-->id2(Stop)
+    style id1 fill:#f9f,stroke:#333,stroke-width:4px
+    style id2 fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+</div>
+
+<div class="mermaid">
+flowchart LR
+    A[Hard edge] -->|Link text| B(Round edge)
+    B --> C{Decision}
+    C -->|One| D[Result one]
+    C -->|Two| E[Result two]
+</div>
+
+<div class="mermaid">
+    flowchart LR;
+</div>
+
+<script>
+    var callback = function(){
+        alert('A callback was triggered');
+    }
+    var config = {
+        startOnLoad:true,
+        flowchart:{
+            useMaxWidth:true,
+            htmlLabels:true,
+            curve:'cardinal',
+        },
+        securityLevel:'loose',
+    };
+
+    mm.initialize(config);
+    mermaid.initialize(config);
+</script>
+
+</body>
+
+</html>

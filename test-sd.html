@@ -1,0 +1,43 @@
+<html>
+
+<head>
+	<title>sd diagram</title>
+	<script src="mermaid.min.js"></script>
+	<script>mermaid.initialize({startOnLoad:true});</script>
+</head>
+
+<body>
+
+
+<div class="mermaid">
+stateDiagram-v2
+    [*] --> Still
+    Still --> [*]
+    Still --> Moving
+    Moving --> Still
+    Moving --> Crash
+    Crash --> [*]
+</div>
+
+
+<script>
+    var callback = function(){
+        alert('A callback was triggered');
+    }
+    var config = {
+        startOnLoad:true,
+        flowchart:{
+            useMaxWidth:true,
+            htmlLabels:true,
+            curve:'cardinal',
+        },
+        securityLevel:'loose',
+    };
+
+    mm.initialize(config);
+    mermaid.initialize(config);
+</script>
+
+</body>
+
+</html>
