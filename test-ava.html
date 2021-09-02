@@ -1,0 +1,139 @@
+<html>
+
+<head>
+	<title>av architecture diagram</title>
+	<script src="mermaid.min.js"></script>
+	<script>mermaid.initialize({startOnLoad:true});</script>
+</head>
+
+<body>
+
+
+<div class="mermaid">
+flowchart LR
+ subgraph AV Hardware
+  subgraph Sensors
+   direction TB
+   S1[2D Lidar]
+   S1[2D Lidar]
+   S2[3D Lidar]
+   S2[3D Lidar]
+   S3[Radar]
+   S4[Camera]
+   S5[IR Camera]
+   S6[Light]
+   S7[Rain]
+   S8[V2X]
+  end
+ end
+ subgraph AV Software
+  direction TB
+  subgraph Localization
+   direction TB
+   subgraph GPS
+   end
+   subgraph DR
+   end
+   subgraph L2DL
+   end
+   subgraph L3DL
+   end
+   subgraph LocFusion
+   end
+  end
+  subgraph Perception
+   direction TB
+   subgraph ML_Module
+    direction LR
+    ImageNet
+    LidarNet
+    SegNet
+    TLC
+    SRC
+    DepthNet
+    PoseNet
+   end
+   subgraph Lidar_Module
+    direction LR
+    LidarPercep
+    MapBaseLidarPercep
+   end
+   subgraph Radar_Module
+    direction LR
+    RadarPercep
+   end
+   subgraph Fusion_Module
+    direction LR
+    PerFusion
+    HybridFusion
+   end
+  end
+  subgraph Navigation
+   direction TB
+   subgraph BRM
+   end
+   subgraph PPM
+   end
+   subgraph PFM
+   end
+   subgraph CAM
+   end
+  end
+  subgraph Control
+   direction TB
+   subgraph STWI
+   end
+   subgraph STW
+   end
+   subgraph VCM
+   end
+  end
+ end
+
+ S1[2D Lidar] --> Perception
+ S1[2D Lidar] --> Localization 
+ S2[3D Lidar] --> Perception
+ S2[3D Lidar] -.-> Localization 
+ S3[Radar] --> Perception
+ S4[Camera] --> Perception
+ %% S5[IR Camera] -.-> Perception
+
+ Localization --> Perception
+ Localization --> Navigation
+ Perception --> Navigation
+ Navigation --> Control
+
+ GPS & DR & L2DL & L3DL --> LocFusion
+ ML_Module & Lidar_Module & Radar_Module --> Fusion_Module
+ BRM --> PPM --> PFM
+ STWI --> STW & VCM
+
+ style S5 fill:#aaf,stroke:none,stroke-width:4px;
+ style S6 fill:#aaf,stroke:none,stroke-width:4px;
+ style S7 fill:#aaf,stroke:none,stroke-width:4px;
+ style S8 fill:#aaf,stroke:none,stroke-width:4px;
+ style L3DL fill:#aaf,stroke:none,stroke-width:4px;
+ linkStyle 3 stroke-width:4px,fill:none,stroke:blue;
+</div>
+
+
+<script>
+    var callback = function(){
+        alert('A callback was triggered');
+    }
+    var config = {
+        startOnLoad:true,
+        flowchart:{
+            useMaxWidth:true,
+            htmlLabels:true,
+            curve:'cardinal',
+        },
+        securityLevel:'loose',
+    };
+
+    mermaid.initialize(config);
+</script>
+
+</body>
+
+</html>
